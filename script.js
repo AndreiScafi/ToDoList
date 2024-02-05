@@ -15,6 +15,17 @@ const taskData = [];
 let currentTask = {};
 // End of Variables
 
+//Reset function
+const reset = () => {
+    titleInput.value = '';
+    dateInput.value = '';
+    descriptionInput.value = '';
+
+    taskForm.classList.toggle('hidden');
+    currentTask = {};
+};
+//End of Reset function
+
 // Event listeners
 openTaskFormBtn.addEventListener('click', () => {
     taskForm.classList.toggle('hidden');
@@ -30,7 +41,7 @@ cancelBtn.addEventListener('click', () => {
 
 discardBtn.addEventListener('click', () => {
     confirmCloseDialog.close();
-    taskForm.classList.toggle('hidden');
+    reset();
 });
 
 taskForm.addEventListener('submit', (e) => {
@@ -59,7 +70,7 @@ taskForm.addEventListener('submit', (e) => {
         `
     });
 
-    taskForm.classList.toggle('hidden');
+    reset();
     // Displaying the tasks
 
 });
