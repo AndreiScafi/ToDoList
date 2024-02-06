@@ -11,7 +11,7 @@ const titleInput = document.getElementById('title-input');
 const dateInput = document.getElementById('date-input');
 const descriptionInput = document.getElementById('description-input');
 
-const taskData = [];
+const taskData = JSON.parse(localStorage.getItem('data')) || [];
 let currentTask = {};
 // End of Variables
 
@@ -34,6 +34,12 @@ const addOrUpdateTask = () => {
     } else {
         taskData[dataArrIndex] = taskObj;
     }
+
+    //Adding items to localStorage
+
+    localStorage.setItem("data", JSON.stringify(taskData));
+
+    //End of Adding items to localStorage
 
     updateTaskContainer();
     reset();
@@ -67,6 +73,10 @@ const deleteTask = (buttonEl) => {
 
     buttonEl.parentElement.remove();
     taskData.splice(dataArrIndex, 1);
+
+    // Updating local storage data
+    localStorage.setItem("data", JSON.stringify(taskData));
+    // end of Updating local storage data 
 };
 // End of delete task function
 
@@ -96,6 +106,12 @@ const reset = () => {
     currentTask = {};
 };
 //End of Reset function
+
+// Displaying local storage data
+if (taskData.length) {
+    updateTaskContainer();
+}
+// End of Displaying local storage data
 
 // Event listeners
 openTaskFormBtn.addEventListener('click', () => {
